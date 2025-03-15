@@ -15,7 +15,6 @@
   const handleLogin = async (req , res) => {
 
     try{
-      console.log(dataForm.value)
       await Axios.post("/login" , dataForm.value)
       
       router.push("/profile")

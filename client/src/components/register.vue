@@ -21,7 +21,7 @@
            
           }
           catch(e){
-                errorMsg.value =  e.response.data.message;
+                errorMsg.value =  "register failed";
                 console.log(e)
                 
           }

@@ -3,7 +3,7 @@ const express = require("express")
 const app = express()
 const mongoose = require("mongoose")
 const MONGODB_URI = process.env.MONGODB 
-const router = require("./Route/authRoute.js")
+const router = require("../server/Route/authRoute.js")
 const cors = require("cors")
 const MongoStore = require("connect-mongo")
 const session = require("express-session")
@@ -12,7 +12,7 @@ const session = require("express-session")
 app.use(express.json());  
 
 app.use(cors({         
-    origin: 'https://auth-practice-mu.vercel.app/', 
+    origin: 'https://auth-practice-mu.vercel.app', 
     methods: ['GET', 'POST', 'PUT', 'DELETE'], 
     credentials: true, // 👈 Allows cookies! 
     allowedHeaders: "Content-Type,Authorization"
