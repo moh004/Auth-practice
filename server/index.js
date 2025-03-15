@@ -12,7 +12,8 @@ const session = require("express-session")
 app.use(express.json());  
 
 app.use(cors({         
-    origin: 'https://auth-practice-mu.vercel.app/',  
+    origin: 'https://auth-practice-mu.vercel.app/', 
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], 
     credentials: true, // 👈 Allows cookies! 
     allowedHeaders: "Content-Type,Authorization"
 }))
@@ -29,7 +30,7 @@ app.use(
        }),
        cookie: {
         httpOnly: true,
-        secure: false, //  true if using HTTPS
+        secure: true, //  true if using HTTPS
         maxAge: 1000 * 60 * 60 * 24 * 14 // 14 days
     }
     })
