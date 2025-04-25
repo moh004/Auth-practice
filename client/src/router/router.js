@@ -21,16 +21,23 @@ const router = createRouter({
 
 
 
-const checkAuth = async () => {
-    try {
-      const response = await Axios.get("/check-auth", { withCredentials: true })
+const checkAuth = () => {
+  const token = localStorage.getItem('authToken');
+  if (!token) return false;
+  else return true; 
+};
 
-      return response.data.isAuthenticated;
-    } catch (error) {
-      console.error("Auth check failed:", error);
-      return false;
-    }
+router.beforeEach((to, from, next) => {
+  const isAuthenticated = checkAuth();
+  
+  if (to.meta.requiresAuth && !isAuthenticated) {
+    next("/login");
+  } else if (to.meta.guest && isAuthenticated) {
+    next("/profile");
+  } else {
+    next();
   }
+});
   
 
    // // i have no idea what is going on in router.beforeEach() 👇 and CHAT GPT told me to 🤖 do it
