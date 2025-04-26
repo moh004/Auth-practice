@@ -8,7 +8,7 @@ import NotFound from "@/view/404page.vue"
 
 
 const router = createRouter({
-    history: createWebHistory("/"), // <=== i have no idea what's happening here
+    history: createWebHistory(), // <=== i have no idea what's happening here
     routes:[
         { path: "/", component: homePage },
         { path: "/login", component: login, meta: { guest: true } },
