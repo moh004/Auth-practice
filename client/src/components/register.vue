@@ -21,7 +21,7 @@
            
           }
           catch(e){
-                errorMsg.value =  "register failed";
+                errorMsg.value =  "register failed \n there is user with this info";
                 console.log(e)
                 
           }

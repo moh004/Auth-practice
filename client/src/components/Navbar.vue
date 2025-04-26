@@ -5,17 +5,20 @@
     import Axios from '@/api/axios';
 
    
-  const isConnected = ref(false);
+  let isConnected = ref(false);
   
-const checkAuth = async () => {
-      try {
-          const result = await Axios.get("/check-auth")
-          isConnected.value = result.data.isAuthenticated
-      }
-      catch(e) {
-        console.log(e)
-      }
+/*  */
+const isAuth = async () => {
+  // Check for the session cookie (name depends on your backend)
+  try {
+    const response = await Axios.get("/check-auth", { withCredentials: true })
+    
+    isConnected.value = response.data.isAuthenticated;
+  } catch (error) {
+    console.error("Auth check failed:", error);
+    return false;
 }
+};
 
 const logout = async () => {
         try {
@@ -27,8 +30,8 @@ const logout = async () => {
         }
     }
 
-onMounted (() => {
-  checkAuth()
+onMounted (async () => {
+  await isAuth()
 })
 
 </script>

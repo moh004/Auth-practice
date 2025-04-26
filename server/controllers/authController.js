@@ -84,16 +84,26 @@ exports.log_out = async (req , res) => {
 
 //GET
 
-exports.checkAuth = async (req, res) => {
-    if (!req.session.user) {
-      return res.json({ isAuthenticated: false });
+
+  exports.checkAuth = async (req, res) => {
+    
+      if (!req.session.user) {
+        return res.json({ isAuthenticated: false });
     }
-    // Session is enough proof of auth; no DB needed
-    res.json({ 
-      isAuthenticated: true,
-      user: req.session.user // Return cached session data
-    });
-  };
+  
+    try {
+        const user = await User.findById(req.session.user.id)
+        if (!user) {
+            return res.json({ isAuthenticated: false });
+        }
+  
+        res.json({ isAuthenticated: true, user });
+    } catch (error) {
+        console.error("Auth check error:", error);
+        res.status(500).json({ isAuthenticated: false });
+    }
+  }
+
 
 
  

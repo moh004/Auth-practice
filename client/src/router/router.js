@@ -8,7 +8,7 @@ import NotFound from "@/view/404page.vue"
 
 
 const router = createRouter({
-    history: createWebHistory(import.meta.env.Base_URL), // <=== i have no idea what's happening here
+  history: createWebHistory("/"), // <=== i have no idea what's happening here
     routes:[
         { path: "/", component: homePage },
         { path: "/login", component: login, meta: { guest: true } },
@@ -21,29 +21,23 @@ const router = createRouter({
 
 
 
-const checkAuth = () => {
-  const token = localStorage.getItem('authToken');
-  if (!token) return false;
-  else return true; 
-};
-
-router.beforeEach((to, from, next) => {
-  const isAuthenticated = checkAuth();
+ const isAuth = async () => {
   
-  if (to.meta.requiresAuth && !isAuthenticated) {
-    next("/login");
-  } else if (to.meta.guest && isAuthenticated) {
-    next("/profile");
-  } else {
-    next();
-  }
-});
+  try {
+    const response = await Axios.get("/check-auth", { withCredentials: true })
+    
+    return response.data.isAuthenticated;
+  } catch (error) {
+    console.error("Auth check failed:", error);
+    return false;
+}
+};
   
 
    // // i have no idea what is going on in router.beforeEach() 👇 and CHAT GPT told me to 🤖 do it
   // Navigation guard for authentication
   router.beforeEach( async (to, from, next) => {
-    const isAuthenticated = await checkAuth();
+    const isAuthenticated = await isAuth();
   
     if (to.meta.requiresAuth && !isAuthenticated) {
       next("/login"); // Redirect to login if not authenticated
