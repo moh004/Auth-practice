@@ -42,8 +42,8 @@ router.beforeEach((to, from, next) => {
 
    // // i have no idea what is going on in router.beforeEach() 👇 and CHAT GPT told me to 🤖 do it
   // Navigation guard for authentication
-  router.beforeEach( async (to, from, next) => {
-    const isAuthenticated = await checkAuth();
+  router.beforeEach( (to, from, next) => {
+    const isAuthenticated = checkAuth();
   
     if (to.meta.requiresAuth && !isAuthenticated) {
       next("/login"); // Redirect to login if not authenticated
