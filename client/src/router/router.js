@@ -27,17 +27,7 @@ const checkAuth = () => {
   else return true; 
 };
 
-router.beforeEach((to, from, next) => {
-  const isAuthenticated = checkAuth();
-  
-  if (to.meta.requiresAuth && !isAuthenticated) {
-    next("/login");
-  } else if (to.meta.guest && isAuthenticated) {
-    next("/profile");
-  } else {
-    next();
-  }
-});
+
   
 
    // // i have no idea what is going on in router.beforeEach() 👇 and CHAT GPT told me to 🤖 do it
