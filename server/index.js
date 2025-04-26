@@ -11,12 +11,12 @@ const session = require("express-session")
 
 app.use(express.json());  
 
-app.use(cors({         
-    origin: 'https://auth-practice-mu.vercel.app', 
-    methods: ['GET', 'POST', 'PUT', 'DELETE'], 
-    credentials: true, // 👈 Allows cookies! 
-    allowedHeaders: "Content-Type,Authorization"
-}))
+app.use(cors({
+    origin: 'https://auth-practice-mu.vercel.app',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: true, // Allows cookies/sessions
+    allowedHeaders: ['Content-Type', 'Authorization'] 
+}));
 
 
 app.use( 
