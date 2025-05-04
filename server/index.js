@@ -33,6 +33,7 @@ app.use(
        cookie: {
         httpOnly: true,
         secure: true, //  true if using HTTPS
+        sameSite: "none",
         maxAge: 1000 * 60 * 60 * 24 * 14 // 14 days
     }
     })
