@@ -18,6 +18,8 @@ app.use(cors({
     allowedHeaders: ['Content-Type', 'Authorization'] 
 }));
 
+app.set("trust proxy", 1); // trust first proxy (needed for secure cookies )
+
 
 app.use( 
     session({
